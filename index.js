@@ -22,9 +22,6 @@ app.use( methodOverride() );
 app.use( express.static(path.join(__dirname, '/client')) );
 
 
-
-
-
 //api routes
 //Purpose:
 app.post('/api/twitter', function(req,res){

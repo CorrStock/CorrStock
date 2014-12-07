@@ -18,29 +18,35 @@ var T = new Twit({
 var getData = function(stock, startDate, endDate, callback){
 
     //Date Range fucntion to create an array of ISO dates
-    var itr = moment.twix(new Date(startDate),new Date(endDate)).iterate("days");
-    var range= [];
-    while(itr.hasNext()){
-      range.push(itr.next().toDate().toISOString().slice(0,10));
-    }
+    var itr = moment(new Date(startDate)).twix(new Date(endDate)).iterate("days");
 
+    var range = [];
+    while(itr.hasNext()){
+      var day = itr.next();
+      if(day.toDate().getDay() !== 5 && day.toDate().getDay() !== 6){
+        range.push(day.toISOString().slice(0,10));
+      }
+    }
     var dataArray = [];
 
-    clog(itr);
 
     //iterate over dateRange
     for(var i=0; i < range.length; i++){
       var date = range[i];
-
-      // clog(date);
-      // var dayCount = 0;
       //Iterate over all statuses
       (function(date, i) {
-        // if(range[i])
-        T.get('search/tweets', { q: stock +' since:' + range[i] +' until:'+ range[i+1], count: 10000000}, function(err, data, response) {
+        var dateUntil
+        if(i === range.length-1){
+          dateUntil = ' until:'+ range[i];
+        } else {
+          dateUntil =' until:'+ range[i+1];
+        }
+
+        var queryObj = { q: stock +' since:' + range[i] + dateUntil, count: 10000000 };
+        T.get('search/tweets', queryObj , function(err, data, response) {
 
           var dayCount = 0;
-          clog(data);
+
           for (var n=0; n < data.statuses.length; n++) {
             //Create twitDate as ISO string
             var twitDate = moment(data.statuses[n].created_at).toISOString().slice(0,10);
@@ -52,11 +58,10 @@ var getData = function(stock, startDate, endDate, callback){
           }
           //push to dataArray
           dataArray[i] = [date, dayCount];
-          clog(dataArray);
+          clog('TWIITER\n' + dataArray);
         });
       })(date, i);
 
-      clog(date);
     };
 
 
@@ -67,7 +72,7 @@ var getData = function(stock, startDate, endDate, callback){
     // callback(results);
 };
 
-getData('facebook','2014-12-01','2014-12-05',function(){});
+getData('apple','2014-12-02','2014-12-04',function(){});
 
 module.exports = {getData:getData};
 
