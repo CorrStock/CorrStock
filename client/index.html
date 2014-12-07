@@ -3,16 +3,25 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="corrStock" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="corrStock"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CorrStock</title>
    <meta name="description">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
 
+  <script type='text/javascript' src="../bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src='app.js'></script>
+</head>
+<body ng-controller='mainController'>
+  <h1>CorrStock</h1>
+  <form>
+    <input type='text' placeholder='Enter a stock symbol' ng-model='formData.stock'>
+    Start Date: <input type='date' ng-model='formData.startDate'>
+    End Date: <input type='date' ng-model='formData.endDate'>
+    <button type='submit' ng-click='sendStockInfo()'>Submit</button>
+  </form>
 </body>
 </html>
 
