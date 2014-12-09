@@ -1,8 +1,8 @@
-function clog(v){console.log(v);}
 var requestJson = require('request-json'); //https://www.npmjs.org/package/request-json
 var expect      = require('chai').expect;
 var Twitter     = require('../server/apis/twitter.js');
-var Quandl      = require('./server/apis/quandl.js');
+var Quandl      = require('../server/apis/quandl.js');
+var clog        = require('simpleclog');
 //!!
 // be sure to 'nodemon index.js' in root directory before doing 'npm test' in root directory
 //!!
@@ -17,7 +17,6 @@ beforeEach(function(){
 
 
 describe("Server side API functioning", function() {
-
   it("should serve static files", function(done) {
     client.get('/', function(err, res, body){
       expect(body.toString().match(/<html/)).to.be.ok;

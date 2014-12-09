@@ -3,16 +3,20 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="corrStock"> <!--<![endif]-->
+<html lang="en" ng-app="corrstock"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CorrStock</title>
    <meta name="description">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script type='text/javascript' src="../bower_components/angular/angular.js"></script>
-  <script type="text/javascript" src='app.js'></script>
+  <script src="./bower_components/jquery/dist/jquery.js"></script>
+  <script src="./bower_components/d3/d3.min.js" charset="utf-8"></script>
+  <script src="./bower_components/c3/c3.min.js" charset="utf-8"></script>
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src='./app.js'></script>
+  <link href="./bower_components/c3/c3.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body ng-controller='mainController'>
   <h1>CorrStock</h1>
@@ -22,6 +26,10 @@
     End Date: <input type='date' ng-model='formData.endDate'>
     <button type='submit' ng-click='sendStockInfo()'>Submit</button>
   </form>
+  <div id="gauge"></div>
+      <h2 id='h2'class='fx-fade-down fx-easing-bounce'>{{formData.stock}} Volatilty vs _____ Correlation</h2>
+  <div id="container" style="height: 400px; min-width: 310px"></div>
+  <script src="http://code.highcharts.com/stock/highstock.js"></script>
 </body>
 </html>
 

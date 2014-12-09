@@ -1,21 +1,21 @@
 //index.js
-function clog(v){console.log(v);}
-
 var express      = require('express')        ,
   bodyParser     = require('body-parser')    ,
   methodOverride = require('method-override'),
   path           = require('path')           ,
   http           = require('http')           ,
   morgan         = require('morgan')         ,
-  app            = express()                 ;
+  app            = express()                 ,
+  clog           = require('simpleclog')     ;
 
-var Twitter = require('./server/apis/twitter.js');
+// var Twitter = require('./server/apis/twitter.js');
 var Quandl = require('./server/apis/quandl.js');
+var Google = require('./server/apis/google.js');
 
 //config
 app.set('port', process.env.PORT || 3000);
 app.use( morgan('dev') );
-app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use( bodyParser.urlencoded({'extended':'true'}));
 app.use( bodyParser.json() );
 app.use( bodyParser.json({ type: 'application/vnd.api+json' }) );
 app.use( methodOverride() );
@@ -39,6 +39,8 @@ app.post('/api/twitter', function(req,res){
 
 
 app.post('/api/quandl', function(req,res){
+  clog('REQ.BODY BELOWWWWW::::::');
+  clog(req.body);
   Quandl.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
     clog("QUANDL TOPPP");
     clog(data);
@@ -47,6 +49,14 @@ app.post('/api/quandl', function(req,res){
   })
 });
 
+app.post('/api/google', function(req,res){
+  Google.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
+    clog("GOOGLE TOPPP");
+    clog(data);
+    clog("GOOGLE BOTTOM");
+    res.json(data);
+  })
+});
 
 
 http.createServer(app).listen(app.get('port'), function(){
