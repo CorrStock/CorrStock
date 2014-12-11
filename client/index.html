@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="corrstock"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CorrStock</title>
+   <meta name="description">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./bower_components/jquery/dist/jquery.js"></script>
+  <script src="./bower_components/d3/d3.min.js" charset="utf-8"></script>
+  <script src="./bower_components/c3/c3.min.js" charset="utf-8"></script>
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src="./bower_components/highstock/js/highstock.src.js"></script>
+  <script src="./bower_components/highstock/js/highcharts.src.js"></script>
+  <script src="./bower_components/highstock/js/highcharts-more.src.js"></script>
+  <script src='./app.js'></script>
+  <link href="./bower_components/c3/c3.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body ng-controller='mainController'>
+  <h1>CorrStock</h1>
+  <form>
+    <input type='text' placeholder='Enter a stock symbol' ng-model='formData.stock'>
+    Start Date: <input type='date' ng-model='formData.startDate'>
+    End Date: <input type='date' ng-model='formData.endDate'>
+    <button type='submit' ng-click='sendStockInfo()'>Submit</button>
+  </form>
+      <h2 id='h2'class='fx-fade-down fx-easing-bounce'>Search: {{formData.stock}} vs News Correlation</h2>
+  <div id="chart" style="height: 400px; min-width: 310px"></div>
+  <div style="width: 600px; height: 400px; margin: 0 auto">
+    <div id="correlation-gauge" style="width: 400px; height: 300px; margin: 0 auto"></div>
+  </div>
+  <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
