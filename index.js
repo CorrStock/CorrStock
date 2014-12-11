@@ -8,9 +8,11 @@ var express      = require('express')        ,
   app            = express()                 ,
   clog           = require('simpleclog')     ;
 
-// var Twitter = require('./server/apis/twitter.js');
+var Twitter = require('./server/apis/twitter.js');
 var Quandl = require('./server/apis/quandl.js');
 var Google = require('./server/apis/google.js');
+var NYT = require('./server/apis/nyt.js');
+var Yahoo = require('./server/apis/yahoofinance.js')
 
 //config
 app.set('port', process.env.PORT || 3000);
@@ -22,42 +24,39 @@ app.use( methodOverride() );
 app.use( express.static(path.join(__dirname, '/client')) );
 
 
-//api routes
-//Purpose:
 app.post('/api/twitter', function(req,res){
-  // console.log(req.body)
-  // res.json( {woo:999} );
   Twitter.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
-    //data is being retrieve from get data correct...
-    //but for the test to get it back in time is apparently too long
-    clog("TWIT TOPPP");
+    clog('Data to get sent from');
     clog(data);
-    clog("TWIT BOTTOM");
     res.json(data);
   })
 });
 
 
 app.post('/api/quandl', function(req,res){
-  clog('REQ.BODY BELOWWWWW::::::');
-  clog(req.body);
   Quandl.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
-    clog("QUANDL TOPPP");
-    clog(data);
-    clog("QUANDL BOTTOM");
+    res.json(data);
+  })
+});
+
+
+app.post('/api/nyt', function(req,res){
+  NYT.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
     res.json(data);
   })
 });
 
 app.post('/api/google', function(req,res){
   Google.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
-    clog("GOOGLE TOPPP");
-    clog(data);
-    clog("GOOGLE BOTTOM");
     res.json(data);
   })
 });
 
+app.post('/api/yahoofinance', function(req,res){
+  Yahoo.getData(req.body.stock, function(data){
+    res.json(data);
+  })
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   clog('Express server listening on port ' + app.get('port') );

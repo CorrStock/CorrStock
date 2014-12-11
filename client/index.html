@@ -14,6 +14,9 @@
   <script src="./bower_components/d3/d3.min.js" charset="utf-8"></script>
   <script src="./bower_components/c3/c3.min.js" charset="utf-8"></script>
   <script src="./bower_components/angular/angular.js"></script>
+  <script src="./bower_components/highstock/js/highstock.src.js"></script>
+  <script src="./bower_components/highstock/js/highcharts.src.js"></script>
+  <script src="./bower_components/highstock/js/highcharts-more.src.js"></script>
   <script src='./app.js'></script>
   <link href="./bower_components/c3/c3.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -26,10 +29,12 @@
     End Date: <input type='date' ng-model='formData.endDate'>
     <button type='submit' ng-click='sendStockInfo()'>Submit</button>
   </form>
-  <div id="gauge"></div>
-      <h2 id='h2'class='fx-fade-down fx-easing-bounce'>{{formData.stock}} Volatilty vs _____ Correlation</h2>
-  <div id="container" style="height: 400px; min-width: 310px"></div>
-  <script src="http://code.highcharts.com/stock/highstock.js"></script>
+      <h2 id='h2'class='fx-fade-down fx-easing-bounce'>Search: {{formData.stock}} vs News Correlation</h2>
+  <div id="chart" style="height: 400px; min-width: 310px"></div>
+  <div style="width: 600px; height: 400px; margin: 0 auto">
+    <div id="correlation-gauge" style="width: 400px; height: 300px; margin: 0 auto"></div>
+  </div>
+  <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
 </body>
 </html>
 

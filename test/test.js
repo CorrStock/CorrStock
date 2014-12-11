@@ -3,9 +3,12 @@ var expect      = require('chai').expect;
 var Twitter     = require('../server/apis/twitter.js');
 var Quandl      = require('../server/apis/quandl.js');
 var clog        = require('simpleclog');
+var sinon       = require('sinon');
 //!!
 // be sure to 'nodemon index.js' in root directory before doing 'npm test' in root directory
 //!!
+
+clog(sinon);
 
 
 
@@ -34,7 +37,7 @@ describe("Server side API functioning", function() {
       startDate:  '2014-12-05',
       endDate:    '2014-12-10'
     };
-    client.post('/api/twitter-count', objToTwitter, function(err, res, body){
+    client.post('/api/twitter', objToTwitter, function(err, res, body){
       expect(body.dataArray).to.be.an('array');
       done();
     });

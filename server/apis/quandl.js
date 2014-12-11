@@ -23,7 +23,7 @@ var getData = function(stock, startDate, endDate, callback){
 
       for(var i = 0; i < arrOfArr.length;i++){
         arrOfArr[i][0] = new Date(arrOfArr[i][0]).getTime();
-        clog('RESULT'+ arrOfArr[i][0]);
+        arrOfArr[i][1] = arrOfArr[i][1]*100;
       }
 
       callback(arrOfArr);
