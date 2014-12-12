@@ -22,7 +22,7 @@ app.use( bodyParser.json() );
 app.use( bodyParser.json({ type: 'application/vnd.api+json' }) );
 app.use( methodOverride() );
 app.use( express.static(path.join(__dirname, '/client')) );
-
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 app.post('/api/twitter', function(req,res){
   Twitter.getData(req.body.stock, req.body.startDate, req.body.endDate, function(data){
