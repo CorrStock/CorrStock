@@ -3,12 +3,12 @@ var expect      = require('chai').expect;
 var Twitter     = require('../server/apis/twitter.js');
 var Quandl      = require('../server/apis/quandl.js');
 var clog        = require('simpleclog');
-var sinon       = require('sinon');
+
 //!!
 // be sure to 'nodemon index.js' in root directory before doing 'npm test' in root directory
 //!!
 
-clog(sinon);
+
 
 
 
