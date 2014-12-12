@@ -8,7 +8,7 @@ var clog        = require('simpleclog');
 // be sure to 'nodemon index.js' in root directory before doing 'npm test' in root directory
 //!!
 
-//PUSH TO HEROKU
+//PUSH TO HEROKU!!!
 
 
 
